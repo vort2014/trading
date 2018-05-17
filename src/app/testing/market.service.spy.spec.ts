@@ -18,6 +18,10 @@ export class MarketServiceSpy implements MarketService
     return new Trade(stock, count, stock.getPrice());
   }
 
+  addStock(symbol: string, company: string)
+  {
+  }
+
   private getFakeMStocks(): Stock[]
   {
     let stocks: Stock[] = [];

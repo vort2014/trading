@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Trader} from "../domain/Trader";
+import {TradersService} from "./traders.service";
 
 @Component({
   selector: 'app-traders',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TradersComponent implements OnInit {
 
-  constructor() { }
+  traders: Trader[];
 
-  ngOnInit() {
+  constructor(private tradersService: TradersService) { }
+
+  ngOnInit()
+  {
+    this.updateTraders();
+  }
+
+  private updateTraders()
+  {
+    this.traders = this.tradersService.getTraders();
+  }
+
+  add(name: string)
+  {
+    this.tradersService.add(name);
+    this.updateTraders();
   }
 
 }

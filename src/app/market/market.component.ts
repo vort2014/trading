@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Stock} from "../domain/Stock";
+import {MarketServiceImpl} from "./market.service";
 
 @Component({
   selector: 'app-market',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
 
-  constructor() { }
+  stocks: Stock[];
 
-  ngOnInit() {
+  constructor(private marketService: MarketServiceImpl)
+  {
+    this.stocks = [];
+  }
+
+  ngOnInit()
+  {
+    this.updateStocks();
+  }
+
+  private updateStocks()
+  {
+    this.stocks = this.marketService.getStocks();
+  }
+
+  add(symbol: string, company: string)
+  {
+    this.marketService.addStock(symbol, company);
+    this.updateStocks();
   }
 
 }

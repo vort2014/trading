@@ -1,3 +1,15 @@
-<p>
-  stocks works!
-</p>
+
+<md-input-container>
+  <input type="text" mdInput [formControl]="stockInput" [mdAutocomplete]="auto" id="stockInput" >
+</md-input-container>
+
+<md-autocomplete #auto="mdAutocomplete">
+  <md-option *ngFor="let stock of filteredStocks | async" [value]="stock.getSymbol()">
+    {{ stock.getSymbol() }}
+  </md-option>
+</md-autocomplete>
+<br>
+
+<div class="form-group">
+  <label *ngIf="selected != null">Company: {{selected.getCompany()}}</label>
+</div>
